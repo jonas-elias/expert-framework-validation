@@ -34,9 +34,11 @@ class Validation
         'required' => 'O campo :input é obrigatório.',
         'string' => 'O campo :input deve ser do tipo string.',
         'integer' => 'O campo :input deve ser do tipo integer.',
+        'float' => 'O campo :input deve ser do tipo float.',
         'min' => 'O campo :input deve conter pelo menos :min caracteres.',
         'max' => 'O campo :input não deve conter mais de :max caracteres.',
         'exists' => 'O campo :input já existe na tabela.',
+        'not_exists' => 'O campo :input não existe na tabela.'
     ];
 
     /**
@@ -168,6 +170,21 @@ class Validation
     }
 
     /**
+     * Method to validate float input
+     *
+     * @param string $field
+     * @param mixed $params
+     * @return array
+     */
+    private function validateFloat(string $field, mixed $params)
+    {
+        return [
+            'error' => !is_float($this->data[$field] ?? false),
+            'message' => 'float'
+        ];
+    }
+
+    /**
      * Method to validate min input
      *
      * @param string $field
@@ -225,6 +242,27 @@ class Validation
         return [
             'error' => $error,
             'message' => 'exists'
+        ];
+    }
+
+    /**
+     * Method to validate exists item
+     *
+     * @param string $field
+     * @param array $params
+     * @return array
+     */
+    private function validateNotExists(string $field, array ...$params): array
+    {
+        $table = $params[0][0];
+        $column = $params[0][1];
+        $value = $this->data[$field];
+
+        $error = !isset(Database::table($table)->where($column, '=', $value)->get()[0]);
+
+        return [
+            'error' => $error,
+            'message' => 'not_exists'
         ];
     }
 }

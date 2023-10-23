@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "expert-framework/database",
-            "version": "v1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jonas-elias/expert-framework-database.git",
-                "reference": "77f19d97e607c1114f093a1f40dee4f9ef24c615"
+                "reference": "56789be091f3e89eebc12bbc5525dfbcf01fde2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jonas-elias/expert-framework-database/zipball/77f19d97e607c1114f093a1f40dee4f9ef24c615",
-                "reference": "77f19d97e607c1114f093a1f40dee4f9ef24c615",
+                "url": "https://api.github.com/repos/jonas-elias/expert-framework-database/zipball/56789be091f3e89eebc12bbc5525dfbcf01fde2e",
+                "reference": "56789be091f3e89eebc12bbc5525dfbcf01fde2e",
                 "shasum": ""
             },
             "require": {
@@ -41,9 +41,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jonas-elias/expert-framework-database/issues",
-                "source": "https://github.com/jonas-elias/expert-framework-database/tree/v1.0.3"
+                "source": "https://github.com/jonas-elias/expert-framework-database/tree/1.0.4"
             },
-            "time": "2023-10-23T16:23:35+00:00"
+            "time": "2023-10-23T21:53:01+00:00"
         },
         {
             "name": "expert-framework/helpers",
