@@ -2,6 +2,8 @@
 
 namespace ExpertFramework\Validation;
 
+use ExpertFramework\Database\Database;
+
 /**
  * class Validation
  *
@@ -34,6 +36,7 @@ class Validation
         'integer' => 'O campo :input deve ser do tipo integer.',
         'min' => 'O campo :input deve conter pelo menos :min caracteres.',
         'max' => 'O campo :input não deve conter mais de :max caracteres.',
+        'exists' => 'O campo :input já existe na tabela.',
     ];
 
     /**
@@ -112,7 +115,7 @@ class Validation
      * @param mixed $params
      * @return array
      */
-    private function validateRequired($field, $params): array
+    private function validateRequired(string $field, mixed $params): array
     {
         return [
             'error' => !isset($this->data[$field]) || empty($this->data[$field]),
@@ -127,7 +130,7 @@ class Validation
      * @param mixed $params
      * @return array
      */
-    private function validateNullable($field, $params): array
+    private function validateNullable(string $field, mixed $params): array
     {
         return [
             'nullable' => is_null($this->data[$field] ?? null),
@@ -141,7 +144,7 @@ class Validation
      * @param mixed $params
      * @return array
      */
-    private function validateString($field, $params): array
+    private function validateString(string $field, mixed $params): array
     {
         return [
             'error' => !is_string($this->data[$field] ?? false),
@@ -156,7 +159,7 @@ class Validation
      * @param mixed $params
      * @return array
      */
-    private function validateInteger($field, $params)
+    private function validateInteger(string $field, mixed $params)
     {
         return [
             'error' => !is_integer($this->data[$field] ?? false),
@@ -171,7 +174,7 @@ class Validation
      * @param mixed $params
      * @return array
      */
-    private function validateMin($field, $params): array
+    private function validateMin(string $field, mixed $params): array
     {
         $error = false;
         if (strlen(($this->data[$field] ?? null)) < $params[0]) {
@@ -191,7 +194,7 @@ class Validation
      * @param mixed $params
      * @return array
      */
-    private function validateMax($field, $params): array
+    private function validateMax(string $field, mixed $params): array
     {
         $error = false;
         if (strlen(($this->data[$field] ?? null)) > $params[0]) {
@@ -204,9 +207,24 @@ class Validation
         ];
     }
 
-    private function validateExists($field, ...$args)
+    /**
+     * Method to validate exists item
+     *
+     * @param string $field
+     * @param array $params
+     * @return array
+     */
+    private function validateExists(string $field, array ...$params): array
     {
-        // $table = $args[0][0];
-        // $column = $args[0][1];
+        $table = $params[0][0];
+        $column = $params[0][1];
+        $value = $this->data[$field];
+
+        $error = isset(Database::table($table)->where($column, '=', $value)->get()[0]);
+
+        return [
+            'error' => $error,
+            'message' => 'exists'
+        ];
     }
 }
