@@ -1,0 +1,16 @@
+{
+    "name": "expert-framework/validation",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "ExpertFramework\\Validation\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jonas Elias",
+            "email": "jonasdasilvaelias@gmail.com"
+        }
+    ],
+    "require": {}
+}
