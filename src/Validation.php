@@ -10,12 +10,24 @@ namespace ExpertFramework\Validation;
  */
 class Validation
 {
-    private $data;
+    /**
+     * @var array $data
+     */
+    private array $data = [];
 
-    private $rules;
+    /**
+     * @var array $rules
+     */
+    private array $rules;
 
-    private $errors = [];
+    /**
+     * @var array $errors
+     */
+    private array $errors = [];
 
+    /**
+     * @var array $messages
+     */
     private array $messages = [
         'required' => 'O campo :input é obrigatório.',
         'string' => 'O campo :input deve ser do tipo string.',
@@ -24,14 +36,18 @@ class Validation
         'max' => 'O campo :input não deve conter mais de :max caracteres.',
     ];
 
-    public function __construct($data, $rules)
+    /**
+     * Method to validate rules
+     *
+     * @param array $data
+     * @param array $rules
+     * @return void
+     */
+    public function validate(array $data, array $rules): void
     {
         $this->data = $data;
         $this->rules = $rules;
-    }
 
-    public function validate()
-    {
         foreach ($this->rules as $field => $rule) {
             $rules = explode('|', $rule);
             foreach ($rules as $r) {
@@ -69,17 +85,34 @@ class Validation
         }
     }
 
-    public function fails()
+    /**
+     * Method to verify if exists fails
+     *
+     * @return bool
+     */
+    public function fails(): bool
     {
         return !empty($this->errors);
     }
 
-    public function errors()
+    /**
+     * Method to get errors
+     *
+     * @return array
+     */
+    public function errors(): array
     {
         return $this->errors;
     }
 
-    private function validateRequired($field, $params)
+    /**
+     * Method to validate required input
+     *
+     * @param string $field
+     * @param mixed $params
+     * @return array
+     */
+    private function validateRequired($field, $params): array
     {
         return [
             'error' => !isset($this->data[$field]) || empty($this->data[$field]),
@@ -87,14 +120,28 @@ class Validation
         ];
     }
 
-    private function validateNullable($field, $params)
+    /**
+     * Method to validate nullable input
+     *
+     * @param string $field
+     * @param mixed $params
+     * @return array
+     */
+    private function validateNullable($field, $params): array
     {
         return [
             'nullable' => is_null($this->data[$field] ?? null),
         ];
     }
 
-    private function validateString($field, $params)
+    /**
+     * Method to validate string input
+     *
+     * @param string $field
+     * @param mixed $params
+     * @return array
+     */
+    private function validateString($field, $params): array
     {
         return [
             'error' => !is_string($this->data[$field] ?? false),
@@ -102,6 +149,13 @@ class Validation
         ];
     }
 
+    /**
+     * Method to validate integer input
+     *
+     * @param string $field
+     * @param mixed $params
+     * @return array
+     */
     private function validateInteger($field, $params)
     {
         return [
@@ -110,7 +164,14 @@ class Validation
         ];
     }
 
-    private function validateMin($field, $params)
+    /**
+     * Method to validate min input
+     *
+     * @param string $field
+     * @param mixed $params
+     * @return array
+     */
+    private function validateMin($field, $params): array
     {
         $error = false;
         if (strlen(($this->data[$field] ?? null)) < $params[0]) {
@@ -123,7 +184,14 @@ class Validation
         ];
     }
 
-    private function validateMax($field, $params)
+    /**
+     * Method to validate max input
+     *
+     * @param string $field
+     * @param mixed $params
+     * @return array
+     */
+    private function validateMax($field, $params): array
     {
         $error = false;
         if (strlen(($this->data[$field] ?? null)) > $params[0]) {
@@ -136,12 +204,9 @@ class Validation
         ];
     }
 
-    private function validateExists(...$args)
+    private function validateExists($field, ...$args)
     {
-        $table = $args[0];
-        $column = $args[1];
-        $value = $args[2];
-
-        var_dump($args);
+        // $table = $args[0][0];
+        // $column = $args[0][1];
     }
 }
