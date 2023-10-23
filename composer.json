@@ -12,5 +12,7 @@
             "email": "jonasdasilvaelias@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "expert-framework/database": "^1.0"
+    }
 }
