@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types= 1);
+declare(strict_types=1);
 
 namespace ExpertFramework\Validation;
 
@@ -39,8 +39,9 @@ class Validation
         'float' => 'O campo :input deve ser do tipo float.',
         'min' => 'O campo :input deve conter pelo menos :min caracteres.',
         'max' => 'O campo :input não deve conter mais de :max caracteres.',
-        'exists' => 'O campo :input já existe na tabela.',
-        'not_exists' => 'O campo :input não existe na tabela.'
+        'exists' => 'O valor :input já existe na tabela.',
+        'not_exists' => 'O valor :input não existe na tabela.',
+        'soft_delete' => 'O valor não existe na tabela.',
     ];
 
     /**
@@ -68,7 +69,7 @@ class Validation
                 if (method_exists($this, $method)) {
                     $result = $this->$method($field, $params);
 
-                    if ($result['nullable'] ?? false) {
+                    if (($result['nullable'] ?? false)) {
                         break;
                     }
 
@@ -237,12 +238,14 @@ class Validation
     {
         $table = $params[0][0];
         $column = $params[0][1];
-        $value = $this->data[$field];
+        $value = $this->data[$field] ?? null;
 
-        $error = isset(Database::table($table)->where($column, '=', $value)->get()[0]);
+        if ($value) {
+            $error = isset(Database::table($table)->where($column, '=', $value)->get()[0]);
+        }
 
         return [
-            'error' => $error,
+            'error' => $error ?? true,
             'message' => 'exists'
         ];
     }
@@ -267,6 +270,26 @@ class Validation
         return [
             'error' => $error ?? true,
             'message' => 'not_exists'
+        ];
+    }
+
+    private function validateSoftDelete(string $field, array ...$params): array
+    {
+        $table = $params[0][0];
+        $column = $params[0][1];
+        $value = $this->data[$field] ?? null;
+        $columnDelete = $params[0][2];
+        $valueDelete = $params[0][3];
+
+        if ($value) {
+            $error = isset(Database::table($table)
+                ->where($columnDelete, '!=', $valueDelete)
+                ->where($column, '=', $value)->get()[0]);
+        }
+
+        return [
+            'error' => $error ?? true,
+            'message' => 'soft_delete'
         ];
     }
 }
