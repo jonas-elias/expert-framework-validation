@@ -196,7 +196,7 @@ class Validation
     private function validateMin(string $field, mixed $params): array
     {
         $error = false;
-        if (strlen(($this->data[$field] ?? null)) < $params[0]) {
+        if (strlen(($this->data[$field] ?? '')) < $params[0]) {
             $error = true;
         }
 
@@ -216,7 +216,7 @@ class Validation
     private function validateMax(string $field, mixed $params): array
     {
         $error = false;
-        if (strlen(($this->data[$field] ?? null)) > $params[0]) {
+        if (strlen(($this->data[$field] ?? '')) > $params[0]) {
             $error = true;
         }
 
@@ -258,12 +258,14 @@ class Validation
     {
         $table = $params[0][0];
         $column = $params[0][1];
-        $value = $this->data[$field];
+        $value = $this->data[$field] ?? null;
 
-        $error = !isset(Database::table($table)->where($column, '=', $value)->get()[0]);
+        if ($value) {
+            $error = !isset(Database::table($table)->where($column, '=', $value)->get()[0]);
+        }
 
         return [
-            'error' => $error,
+            'error' => $error ?? true,
             'message' => 'not_exists'
         ];
     }
