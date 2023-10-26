@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "expert-framework/database",
-            "version": "v1.1.0",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jonas-elias/expert-framework-database.git",
-                "reference": "beed75faefb4c9d607aaea884b1012ad8f0ef28d"
+                "reference": "cfc6ca3a90819752d651fce24bee8b37f0708b16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jonas-elias/expert-framework-database/zipball/beed75faefb4c9d607aaea884b1012ad8f0ef28d",
-                "reference": "beed75faefb4c9d607aaea884b1012ad8f0ef28d",
+                "url": "https://api.github.com/repos/jonas-elias/expert-framework-database/zipball/cfc6ca3a90819752d651fce24bee8b37f0708b16",
+                "reference": "cfc6ca3a90819752d651fce24bee8b37f0708b16",
                 "shasum": ""
             },
             "require": {
@@ -41,22 +41,22 @@
             ],
             "support": {
                 "issues": "https://github.com/jonas-elias/expert-framework-database/issues",
-                "source": "https://github.com/jonas-elias/expert-framework-database/tree/v1.1.0"
+                "source": "https://github.com/jonas-elias/expert-framework-database/tree/v1.5.1"
             },
-            "time": "2023-10-23T22:41:21+00:00"
+            "time": "2023-10-26T02:00:50+00:00"
         },
         {
             "name": "expert-framework/helpers",
-            "version": "v2.0.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jonas-elias/expert-framework-helpers.git",
-                "reference": "efb310addb5ab8bf4926fd53c914bfd8290cb84d"
+                "reference": "2ffe922ef9350b85cd5c549cbab822a9daac9f42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jonas-elias/expert-framework-helpers/zipball/efb310addb5ab8bf4926fd53c914bfd8290cb84d",
-                "reference": "efb310addb5ab8bf4926fd53c914bfd8290cb84d",
+                "url": "https://api.github.com/repos/jonas-elias/expert-framework-helpers/zipball/2ffe922ef9350b85cd5c549cbab822a9daac9f42",
+                "reference": "2ffe922ef9350b85cd5c549cbab822a9daac9f42",
                 "shasum": ""
             },
             "type": "library",
@@ -77,9 +77,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jonas-elias/expert-framework-helpers/issues",
-                "source": "https://github.com/jonas-elias/expert-framework-helpers/tree/v2.0.0"
+                "source": "https://github.com/jonas-elias/expert-framework-helpers/tree/v2.2.0"
             },
-            "time": "2023-10-22T14:58:04+00:00"
+            "time": "2023-10-25T08:19:58+00:00"
         }
     ],
     "packages-dev": [],
