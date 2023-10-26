@@ -2,6 +2,8 @@
 
 O **Expert Framework Validation** é uma biblioteca PHP criada para simplificar a validação de dados em suas aplicações. Ele oferece um conjunto de regras de validação que podem ser aplicadas a dados de entrada, com mensagens de erro personalizadas.
 
+Componente pertencente ao framework *Jonaselias\ExpertFramework* https://github.com/jonas-elias/mercado-software-expert
+
 ## Instalação 🚀
 
 Para começar a usar o Componente Expert Framework Validation, você pode instalá-lo facilmente via Composer. Basta executar o seguinte comando:
